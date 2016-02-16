@@ -1,0 +1,34 @@
+﻿@model BandAppWeb.Musician
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Musician</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instrument.instrument1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instrument.instrument1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMusician }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

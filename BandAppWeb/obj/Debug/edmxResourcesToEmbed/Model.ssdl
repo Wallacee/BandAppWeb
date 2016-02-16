@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBBandModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Band">
+    <Key>
+      <PropertyRef Name="idBand" />
+    </Key>
+    <Property Name="idBand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="foundationDate" Type="date" Nullable="false" />
+    <Property Name="fk_style" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BandMusician">
+    <Key>
+      <PropertyRef Name="FK_Band" />
+      <PropertyRef Name="FK_Musician" />
+    </Key>
+    <Property Name="FK_Band" Type="int" Nullable="false" />
+    <Property Name="FK_Musician" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Instrument">
+    <Key>
+      <PropertyRef Name="idInstrument" />
+    </Key>
+    <Property Name="idInstrument" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="instrument" Type="nchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Musician">
+    <Key>
+      <PropertyRef Name="idMusician" />
+    </Key>
+    <Property Name="idMusician" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="fk_instrument" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Style">
+    <Key>
+      <PropertyRef Name="idStyle" />
+    </Key>
+    <Property Name="idStyle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="style" Type="nchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Band_Style">
+    <End Role="Style" Type="Self.Style" Multiplicity="1" />
+    <End Role="Band" Type="Self.Band" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Style">
+        <PropertyRef Name="idStyle" />
+      </Principal>
+      <Dependent Role="Band">
+        <PropertyRef Name="fk_style" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BandMusician_Band">
+    <End Role="Band" Type="Self.Band" Multiplicity="1" />
+    <End Role="BandMusician" Type="Self.BandMusician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Band">
+        <PropertyRef Name="idBand" />
+      </Principal>
+      <Dependent Role="BandMusician">
+        <PropertyRef Name="FK_Band" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BandMusician_Musician">
+    <End Role="Musician" Type="Self.Musician" Multiplicity="1" />
+    <End Role="BandMusician" Type="Self.BandMusician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musician">
+        <PropertyRef Name="idMusician" />
+      </Principal>
+      <Dependent Role="BandMusician">
+        <PropertyRef Name="FK_Musician" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Musician_Instrument">
+    <End Role="Instrument" Type="Self.Instrument" Multiplicity="1" />
+    <End Role="Musician" Type="Self.Musician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instrument">
+        <PropertyRef Name="idInstrument" />
+      </Principal>
+      <Dependent Role="Musician">
+        <PropertyRef Name="fk_instrument" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBBandModelStoreContainer">
+    <EntitySet Name="Band" EntityType="Self.Band" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BandMusician" EntityType="Self.BandMusician" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Instrument" EntityType="Self.Instrument" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musician" EntityType="Self.Musician" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Style" EntityType="Self.Style" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Band_Style" Association="Self.FK_Band_Style">
+      <End Role="Style" EntitySet="Style" />
+      <End Role="Band" EntitySet="Band" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BandMusician_Band" Association="Self.FK_BandMusician_Band">
+      <End Role="Band" EntitySet="Band" />
+      <End Role="BandMusician" EntitySet="BandMusician" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BandMusician_Musician" Association="Self.FK_BandMusician_Musician">
+      <End Role="Musician" EntitySet="Musician" />
+      <End Role="BandMusician" EntitySet="BandMusician" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Musician_Instrument" Association="Self.FK_Musician_Instrument">
+      <End Role="Instrument" EntitySet="Instrument" />
+      <End Role="Musician" EntitySet="Musician" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

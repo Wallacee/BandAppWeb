@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBBandModelStoreContainer" CdmEntityContainer="DBBandEntities">
+    <EntitySetMapping Name="Band">
+      <EntityTypeMapping TypeName="DBBandModel.Band">
+        <MappingFragment StoreEntitySet="Band">
+          <ScalarProperty Name="idBand" ColumnName="idBand" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="foundationDate" ColumnName="foundationDate" />
+          <ScalarProperty Name="fk_style" ColumnName="fk_style" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instrument">
+      <EntityTypeMapping TypeName="DBBandModel.Instrument">
+        <MappingFragment StoreEntitySet="Instrument">
+          <ScalarProperty Name="idInstrument" ColumnName="idInstrument" />
+          <ScalarProperty Name="instrument1" ColumnName="instrument" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musician">
+      <EntityTypeMapping TypeName="DBBandModel.Musician">
+        <MappingFragment StoreEntitySet="Musician">
+          <ScalarProperty Name="idMusician" ColumnName="idMusician" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="fk_instrument" ColumnName="fk_instrument" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Style">
+      <EntityTypeMapping TypeName="DBBandModel.Style">
+        <MappingFragment StoreEntitySet="Style">
+          <ScalarProperty Name="idStyle" ColumnName="idStyle" />
+          <ScalarProperty Name="style1" ColumnName="style" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DBBandModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="BandMusician" TypeName="DBBandModel.BandMusician" StoreEntitySet="BandMusician">
+      <EndProperty Name="Band">
+        <ScalarProperty Name="idBand" ColumnName="FK_Band" />
+      </EndProperty>
+      <EndProperty Name="Musician">
+        <ScalarProperty Name="idMusician" ColumnName="FK_Musician" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
