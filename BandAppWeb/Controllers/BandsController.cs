@@ -40,6 +40,8 @@ namespace BandAppWeb.Controllers
         public ActionResult Create()
         {
             ViewBag.fk_style = new SelectList(db.Style, "idStyle", "style1");
+            List<Musician> list = db.Musician.ToList();
+            ViewBag.listMusician = list;
             return View();
         }
 
